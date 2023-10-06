@@ -59,14 +59,24 @@ const NavigationBar = () => {
           {navLink}
         </NavbarContent>
         <NavbarContent justify="end">
-          <NavbarItem className="hidden ">
-            <Link href="#">Login</Link>
-          </NavbarItem>
-          <NavbarItem>
-            <Button as={Link} color="primary" href="#" variant="flat">
-              Sign Up
-            </Button>
-          </NavbarItem>
+          {pathname === "/auth/login" ? (
+            <NavbarItem className="">
+              <Button as={Link} color="success" href="#" variant="flat">
+                Sign Up
+              </Button>
+            </NavbarItem>
+          ) : (
+            <NavbarItem className="">
+              <Button
+                as={Link}
+                color="primary"
+                variant="flat"
+                href="/auth/login"
+              >
+                Login
+              </Button>
+            </NavbarItem>
+          )}
         </NavbarContent>
         <NavbarMenu>{navLink}</NavbarMenu>
       </Navbar>

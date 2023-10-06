@@ -1,10 +1,11 @@
 import React from "react";
+import { HiUserGroup, HiOutlineShoppingBag } from "react-icons/hi";
 
 const AboutStats = () => {
   return (
     <div>
       <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           <div className="text-center">
             <div className="flex items-center justify-center w-10 h-10 mx-auto mb-3 rounded-full bg-indigo-50 sm:w-12 sm:h-12">
               <svg
@@ -22,9 +23,9 @@ const AboutStats = () => {
               </svg>
             </div>
             <h6 className="text-4xl font-bold text-deep-purple-accent-400">
-              819
+              52k
             </h6>
-            <p className="mb-2 font-bold text-md">Sele</p>
+            <p className="mb-2 font-bold text-md">Sale</p>
             <p className="text-gray-700">
               Its something thats many of the wisest people in history have kept
               in mind.
@@ -32,19 +33,7 @@ const AboutStats = () => {
           </div>
           <div className="text-center">
             <div className="flex items-center justify-center w-10 h-10 mx-auto mb-3 rounded-full bg-indigo-50 sm:w-12 sm:h-12">
-              <svg
-                className="w-8 h-8 text-deep-purple-accent-400 sm:w-10 sm:h-10"
-                stroke="currentColor"
-                viewBox="0 0 52 52"
-              >
-                <polygon
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  fill="none"
-                  points="29 13 14 29 25 29 23 39 38 23 27 23"
-                />
-              </svg>
+              <HiUserGroup />
             </div>
             <h6 className="text-4xl font-bold text-deep-purple-accent-400">
               1.3K
@@ -55,46 +44,10 @@ const AboutStats = () => {
               troubles, it only changes them.
             </p>
           </div>
+
           <div className="text-center">
             <div className="flex items-center justify-center w-10 h-10 mx-auto mb-3 rounded-full bg-indigo-50 sm:w-12 sm:h-12">
-              <svg
-                className="w-8 h-8 text-deep-purple-accent-400 sm:w-10 sm:h-10"
-                stroke="currentColor"
-                viewBox="0 0 52 52"
-              >
-                <polygon
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  fill="none"
-                  points="29 13 14 29 25 29 23 39 38 23 27 23"
-                />
-              </svg>
-            </div>
-            <h6 className="text-4xl font-bold text-deep-purple-accent-400">
-              91
-            </h6>
-            <p className="mb-2 font-bold text-md">Subscribers</p>
-            <p className="text-gray-700">
-              Its a helluva start, being able to recognize what makes you happy
-              today, in this moment.
-            </p>
-          </div>
-          <div className="text-center">
-            <div className="flex items-center justify-center w-10 h-10 mx-auto mb-3 rounded-full bg-indigo-50 sm:w-12 sm:h-12">
-              <svg
-                className="w-8 h-8 text-deep-purple-accent-400 sm:w-10 sm:h-10"
-                stroke="currentColor"
-                viewBox="0 0 52 52"
-              >
-                <polygon
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  fill="none"
-                  points="29 13 14 29 25 29 23 39 38 23 27 23"
-                />
-              </svg>
+              <HiOutlineShoppingBag />
             </div>
             <h6 className="text-4xl font-bold text-deep-purple-accent-400">
               52

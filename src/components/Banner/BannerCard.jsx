@@ -49,10 +49,20 @@ const BannerCard = ({ image, title }) => {
               truffaut hexagon try-hard chambray.
             </p>
             <div class="flex justify-center gap-8">
-              <Button radius="sm" color="primary" variant="shadow">
+              <Button
+                radius="sm"
+                color="primary"
+                variant="shadow"
+                className="px-10"
+              >
                 View More
               </Button>
-              <Button radius="sm" color="success" variant="shadow">
+              <Button
+                radius="sm"
+                color="secondary"
+                variant="shadow"
+                className="px-10"
+              >
                 About Us
               </Button>
             </div>

@@ -4,7 +4,7 @@ import BannerCard from "./BannerCard";
 const Banner = () => {
   return (
     <div>
-      <BannerCard image={"/banner1.jpg"} />
+      <BannerCard image={"/banner1.jpg"} title={"Car for Your Baby"} />
     </div>
   );
 };

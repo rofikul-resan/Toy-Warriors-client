@@ -19,7 +19,7 @@ const NavigationBar = () => {
   const navLink = (
     <>
       <NavbarItem isActive={pathname === "/"}>
-        <Link href="#">Home</Link>
+        <Link href="/">Home</Link>
       </NavbarItem>
       <NavbarItem isActive={pathname === "/all-toy"}>
         <Link href="/all-toy">All Toy</Link>
@@ -61,7 +61,12 @@ const NavigationBar = () => {
         <NavbarContent justify="end">
           {pathname === "/auth/login" ? (
             <NavbarItem className="">
-              <Button as={Link} color="success" href="#" variant="flat">
+              <Button
+                as={Link}
+                color="success"
+                href="/auth/sing-up"
+                variant="flat"
+              >
                 Sign Up
               </Button>
             </NavbarItem>

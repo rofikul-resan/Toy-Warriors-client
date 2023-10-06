@@ -17,7 +17,6 @@ const Login = () => {
 
   const handleLogin = (data) => {
     console.log(data);
-    data = {};
   };
   return (
     <div className="bg-violet-600/10 w-10/12 rounded-lg  px-12 py-8 space-y-6 shadow-lg shadow-gray-400">

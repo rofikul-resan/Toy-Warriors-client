@@ -38,6 +38,14 @@ const Banner = () => {
             title={"Monster Truck for Your Baby"}
           />
         </SwiperSlide>
+        <SwiperSlide>
+          <BannerCard
+            image={
+              "https://i.ibb.co/99Jbcgz/149101-photos-toy-superhero-avengers-free-clipart-hd-Copy.png"
+            }
+            title={"Action Toy for Your Baby"}
+          />
+        </SwiperSlide>
       </Swiper>
     </div>
   );

@@ -8,7 +8,7 @@ const BannerCard = ({ image, title }) => {
   const bannerImgRef = useRef(null);
   const bannerContentRef = useRef(null);
   const imgView = useInView(bannerImgRef, { once: false });
-  const contentView = useInView(bannerImgRef, { once: false });
+  const contentView = useInView(bannerImgRef);
   return (
     <div className="grid md:grid-cols-2 gap-8">
       <div

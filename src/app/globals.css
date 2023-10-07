@@ -5,3 +5,11 @@
 .data-\[active\=true\]\:font-semibold[data-active=true] {
     @apply border-b border-orange-500
 }
+
+.category-card:hover .title-category {
+    display: none;
+}
+
+.category-card:hover .category-weeper {
+    @apply scale-100
+}

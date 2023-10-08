@@ -1,5 +1,6 @@
 import AboutStats from "@/components/AboutStats";
 import Banner from "@/components/Banner/Banner";
+import ContactUsSection from "@/components/ContactUsSection";
 import Footer from "@/components/Footer";
 import GallerySection from "@/components/GallerySection";
 import HomeToyCategory from "@/components/HomeToyCategory";
@@ -14,6 +15,7 @@ export default function Home() {
       <HomeToyCategory />
       <AboutStats />
       <GallerySection />
+      <ContactUsSection />
       <Testimonial />
       <Footer />
     </main>

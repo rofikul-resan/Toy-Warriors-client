@@ -10,22 +10,22 @@ const BannerCard = ({ image, title }) => {
   const imgView = useInView(bannerImgRef, { once: false });
   const contentView = useInView(bannerImgRef);
   return (
-    <div className="grid md:grid-cols-2 gap-8">
+    <div className="grid md:grid-cols-2 gap-8 items-center">
       <div
         ref={bannerImgRef}
         className={`
           ${
-            imgView ? " translate-x-[100px]" : " opacity-0  ease-in"
-          } duration-500
+            imgView ? " md:translate-x-[100px]" : " opacity-0  ease-in"
+          } duration-500 h-fit
         `}
       >
         <Image
           src={image}
-          width={400}
-          height={400}
+          width={300}
+          height={300}
           alt="banner  image"
           loading="lazy"
-          className="w-96 h-96"
+          className="h-72 w-fit mx-auto  "
         />
       </div>
       <div

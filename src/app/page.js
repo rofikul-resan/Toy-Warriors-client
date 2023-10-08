@@ -4,15 +4,17 @@ import Footer from "@/components/Footer";
 import GallerySection from "@/components/GallerySection";
 import HomeToyCategory from "@/components/HomeToyCategory";
 import NavigationBar from "@/components/NavigationBar";
+import Testimonial from "@/components/Testimonial/Testimonail";
 
 export default function Home() {
   return (
     <main>
       <NavigationBar />
       <Banner />
-      <AboutStats />
       <HomeToyCategory />
+      <AboutStats />
       <GallerySection />
+      <Testimonial />
       <Footer />
     </main>
   );

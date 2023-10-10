@@ -1,11 +1,11 @@
-import AboutStats from "@/components/AboutStats";
-import Banner from "@/components/Banner/Banner";
-import ContactUsSection from "@/components/ContactUsSection";
-import Footer from "@/components/Footer";
-import GallerySection from "@/components/GallerySection";
-import HomeToyCategory from "@/components/HomeToyCategory";
 import NavigationBar from "@/components/NavigationBar";
-import Testimonial from "@/components/Testimonial/Testimonail";
+import Banner from "./_homeComponents/Banner/Banner";
+import HomeToyCategory from "./_homeComponents/HomeToyCategory";
+import AboutStats from "./_homeComponents/AboutStats";
+import GallerySection from "./_homeComponents/GallerySection";
+import ContactUsSection from "./_homeComponents/ContactUsSection";
+import Testimonial from "./_homeComponents/Testimonial/Testimonail";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (

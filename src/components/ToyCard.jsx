@@ -86,6 +86,8 @@ const ToyCard = () => {
             radius="lg"
             size="sm"
             endContent={<BsArrowRight />}
+            as={Link}
+            href="/toy/main"
           >
             More Details
           </Button>

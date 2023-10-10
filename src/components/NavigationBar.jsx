@@ -12,6 +12,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
+import PrivetSellerNavLink from "./PrivetSellerNavLink";
 
 const NavigationBar = () => {
   const pathname = usePathname();
@@ -34,8 +35,9 @@ const NavigationBar = () => {
       <Navbar
         isBlurred
         maxWidth="xl"
-        position="sticky"
         onMenuOpenChange={setIsMenuOpen}
+        isBordered
+        className="shadow-sm"
       >
         <NavbarContent>
           <NavbarMenuToggle
@@ -57,6 +59,7 @@ const NavigationBar = () => {
 
         <NavbarContent className="hidden sm:flex gap-4" justify="center">
           {navLink}
+          <PrivetSellerNavLink />
         </NavbarContent>
         <NavbarContent justify="end">
           {pathname === "/auth/login" ? (
@@ -83,7 +86,10 @@ const NavigationBar = () => {
             </NavbarItem>
           )}
         </NavbarContent>
-        <NavbarMenu>{navLink}</NavbarMenu>
+        <NavbarMenu>
+          {navLink}
+          <PrivetSellerNavLink />
+        </NavbarMenu>
       </Navbar>
     </div>
   );

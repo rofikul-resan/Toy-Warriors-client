@@ -7,7 +7,7 @@ const PrivetSellerNavLink = () => {
   const pathname = usePathname();
   return (
     <>
-      <NavbarItem isActive={pathname === "/my-toy"}>
+      <NavbarItem isActive={pathname.includes("/my-toy")}>
         <Link href="/my-toy">My Toy</Link>
       </NavbarItem>
     </>

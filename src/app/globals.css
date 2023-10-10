@@ -6,6 +6,8 @@
     scroll-behavior: smooth;
 }
 
+
+
 .data-\[active\=true\]\:font-semibold[data-active=true] {
     @apply border-b border-orange-500
 }

@@ -1,10 +1,9 @@
 import Image from "next/image";
-import Link from "next/link";
 import React from "react";
 
 const CategoryCard = ({ title, image }) => {
   return (
-    <Link href={"#category"}>
+    <>
       <div className="relative category-card p-6 border border-gray-500 rounded-sm flex flex-col justify-center items-center h-full w-full duration-300">
         <Image
           height={200}
@@ -25,7 +24,7 @@ const CategoryCard = ({ title, image }) => {
           </div>
         </div>
       </div>
-    </Link>
+    </>
   );
 };
 

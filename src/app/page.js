@@ -10,7 +10,7 @@ import ToyByCategory from "./_homeComponents/toyByCategory/ToyByCategory";
 
 export default function Home() {
   return (
-    <main>
+    <>
       <NavigationBar />
       <Banner />
       <HomeToyCategory />
@@ -20,6 +20,6 @@ export default function Home() {
       <ContactUsSection />
       <Testimonial />
       <Footer />
-    </main>
+    </>
   );
 }

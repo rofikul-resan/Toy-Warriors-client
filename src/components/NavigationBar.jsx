@@ -22,17 +22,22 @@ const NavigationBar = () => {
       <NavbarItem isActive={pathname === "/"}>
         <Link href="/">Home</Link>
       </NavbarItem>
-      <NavbarItem isActive={pathname === "/all-toy"}>
+      <NavbarItem isActive={pathname.includes("/all-toy")}>
         <Link href="/all-toy">All Toy</Link>
       </NavbarItem>
-      <NavbarItem isActive={pathname === "/blogs"}>
+      <NavbarItem isActive={pathname.includes("/blogs")}>
         <Link href="/blogs">Blogs</Link>
       </NavbarItem>
     </>
   );
   return (
     <div>
-      <Navbar shouldHideOnScroll maxWidth="xl" isBordered className="shadow-sm">
+      <Navbar
+        position="sticky"
+        maxWidth="xl"
+        isBordered
+        className="shadow-sm sticky top-0"
+      >
         <NavbarContent>
           <NavbarMenuToggle
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}

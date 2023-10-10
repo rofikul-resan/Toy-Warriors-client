@@ -16,13 +16,16 @@ const ToyByCategory = () => {
         className={"flex justify-center"}
         variant="bordered"
       >
-        <Tab key="photos" title="Photos">
+        <Tab key="action" title="Action">
           <ToysContener selectTab={selectedTab} />
         </Tab>
-        <Tab key="music" title="Music">
+        <Tab key="car" title="Car">
           <ToysContener selectTab={selectedTab} />
         </Tab>
-        <Tab key="videos" title="Videos">
+        <Tab key="barbie-Boll" title="Barbie Boll">
+          <ToysContener selectTab={selectedTab} />
+        </Tab>
+        <Tab key="educational" title="Educational">
           <ToysContener selectTab={selectedTab} />
         </Tab>
       </Tabs>

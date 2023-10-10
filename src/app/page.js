@@ -6,6 +6,7 @@ import GallerySection from "./_homeComponents/GallerySection";
 import ContactUsSection from "./_homeComponents/ContactUsSection";
 import Testimonial from "./_homeComponents/Testimonial/Testimonail";
 import Footer from "@/components/Footer";
+import ToyByCategory from "./_homeComponents/toyByCategory/ToyByCategory";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       <HomeToyCategory />
       <AboutStats />
       <GallerySection />
+      <ToyByCategory />
       <ContactUsSection />
       <Testimonial />
       <Footer />

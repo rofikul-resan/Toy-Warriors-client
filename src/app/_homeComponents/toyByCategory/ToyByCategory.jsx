@@ -6,7 +6,17 @@ import ToysContener from "./ToysContener";
 const ToyByCategory = () => {
   const [selectedTab, setSelectedTab] = useState("photos");
   return (
-    <div>
+    <div id="/#category">
+      <div className="space-y-3 my-8 ">
+        <h1 className="text-center text-3xl font-bold capitalize">
+          See our all toy and filter by Category{" "}
+        </h1>
+        <p className="w-8/12 text-center mx-auto">
+          Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical
+          gentrify, subway tile poke farm-to-table. Franzen you probably havent
+          heard of them
+        </p>
+      </div>
       <Tabs
         aria-label="Options"
         selectedKey={selectedTab}

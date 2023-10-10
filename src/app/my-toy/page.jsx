@@ -62,7 +62,7 @@ const MyToyPage = () => {
                 $ <span className="font-semibold">58</span>
               </TableCell>
               <TableCell>
-                $ <span className="font-semibold">4.5</span>
+                <span className="font-semibold">4.5</span>
               </TableCell>
               <TableCell>
                 <div className="relative flex items-center gap-2">

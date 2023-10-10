@@ -32,13 +32,7 @@ const NavigationBar = () => {
   );
   return (
     <div>
-      <Navbar
-        isBlurred
-        maxWidth="xl"
-        onMenuOpenChange={setIsMenuOpen}
-        isBordered
-        className="shadow-sm"
-      >
+      <Navbar shouldHideOnScroll maxWidth="xl" isBordered className="shadow-sm">
         <NavbarContent>
           <NavbarMenuToggle
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}

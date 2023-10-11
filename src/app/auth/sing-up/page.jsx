@@ -2,6 +2,7 @@
 import { AuthContext } from "@/firebase/FirebaseProvider";
 import useAuth from "@/hook/useAuth";
 import { Button, Input } from "@nextui-org/react";
+import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useContext, useState } from "react";
@@ -13,11 +14,17 @@ import {
 } from "react-icons/ai";
 
 const SingUp = () => {
-  const { createUser } = useContext(AuthContext);
-  console.log(process.env.NEXT_PUBLIC_FIREBASE_APIKEY);
+  // firebase function
+  const { createUser, updateUserInfo } = useContext(AuthContext);
+
+  //state
+  const [isVisible, setIsVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const toggleVisibility = () => setIsVisible(!isVisible);
+  const [userImageErr, setUserImageErr] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
 
   const router = useRouter();
-  console.log(router);
   const {
     handleSubmit,
     register,
@@ -25,43 +32,62 @@ const SingUp = () => {
     reset,
   } = useForm();
 
-  const [isVisible, setIsVisible] = useState(false);
-  const [emptyFileErr, setEmptyFileErr] = useState(false);
-  const toggleVisibility = () => setIsVisible(!isVisible);
-
   const validateImage = (value) => {
-    if (!value[0]) {
+    if (!value) {
       return "Image is required";
     }
-    if (!value[0].type.includes("image")) {
+    if (!value.type.includes("image")) {
       return "Invalid image format. Please upload a image.";
     }
-    if (value[0].size > 2000000) {
-      // 5MB limit
+    if (value.size > 2000000) {
       return "Image size exceeds the 2MB limit.";
     }
-    return true; // Validation passed
+    return false;
   };
-  const handleImageName = (event) => {
-    console.log(event);
+
+  const changeImage = (image) => {
+    console.log("img", image);
+    const errorMessage = validateImage(image[0]);
+    console.log(errorMessage);
+    if (errorMessage) {
+      setImageFile(null);
+      return setUserImageErr(errorMessage);
+    } else {
+      setImageFile(image);
+    }
   };
+
   // validation complete
 
   // handle sing up
-  const handleSingUp = (data) => {
-    console.log(data.userImage[0]);
-    if (!data.userImage[0]) {
-      setEmptyFileErr(true);
+  const handleSingUp = async (data) => {
+    setLoading(true);
+    try {
+      console.log("img", imageFile);
+      const imgData = new FormData();
+      console.log(imgData);
+      imgData.append("image", imageFile[0]);
+      const res = await axios.post(
+        `https://api.imgbb.com/1/upload?key=${process.env.NEXT_PUBLIC_Img_token}`,
+        imgData
+      );
+      setLoading(false);
+      console.log(data, res.data.data.display_url);
+      const imgUrl = res.data.data.display_url;
+      const userInfo = await createUser(data.email, data.password);
+      if (userInfo.user) {
+        const user = await updateUserInfo(data.fullName, imgUrl);
+        console.log("user", user);
+        if (user) {
+          setLoading(false);
+          reset();
+        }
+      }
+    } catch (err) {
+      setLoading(false);
+      console.log(err);
     }
-    createUser(data.email, data.password)
-      .then((user) => {
-        console.log(user);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
 
-    // router.state = "/home";
     // router.push("/");
   };
   return (
@@ -118,7 +144,7 @@ const SingUp = () => {
           type={isVisible ? "text" : "password"}
           {...register("password", { required: true })}
         />
-        <label htmlFor="userImage" onChange={(e) => handleImageName(e)}>
+        <label htmlFor="userImage">
           {" "}
           <div className="flex flex-col items-center justify-center pt-2 mt-6 border border-gray-600 rounded-md">
             <svg
@@ -135,7 +161,10 @@ const SingUp = () => {
               />
             </svg>
             <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-              <span className="font-semibold">Click to upload</span> User Image
+              <span className="font-semibold">
+                {imageFile ? imageFile[0].name : "Click to upload"}
+              </span>{" "}
+              User Image
             </p>
           </div>
         </label>
@@ -144,18 +173,15 @@ const SingUp = () => {
           accept="image/*"
           id="userImage"
           className="hidden"
-          {...register("userImage", {
-            required: "Image is required",
-            validate: validateImage,
-          })}
+          required
+          onChange={(e) => changeImage(e.target.files)}
         />
-        {errors.userImage && (
-          <p className="text-red-600 font-semibold text-sm">
-            {errors.userImage.message}
-          </p>
+        {userImageErr && (
+          <p className="text-red-600 font-semibold text-sm">{userImageErr}</p>
         )}
         <div>
           <Button
+            isLoading={loading}
             type="submit"
             color="primary"
             className="px-10 w-full"

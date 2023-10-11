@@ -1,8 +1,10 @@
 "use client";
+import { AuthContext } from "@/firebase/FirebaseProvider";
+import useAuth from "@/hook/useAuth";
 import { Button, Input } from "@nextui-org/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import {
   AiOutlineEye,
@@ -11,12 +13,16 @@ import {
 } from "react-icons/ai";
 
 const SingUp = () => {
+  const { createUser } = useContext(AuthContext);
+  console.log(process.env.NEXT_PUBLIC_FIREBASE_APIKEY);
+
   const router = useRouter();
   console.log(router);
   const {
     handleSubmit,
     register,
     formState: { errors },
+    reset,
   } = useForm();
 
   const [isVisible, setIsVisible] = useState(false);
@@ -39,11 +45,22 @@ const SingUp = () => {
   const handleImageName = (event) => {
     console.log(event);
   };
+  // validation complete
+
+  // handle sing up
   const handleSingUp = (data) => {
     console.log(data.userImage[0]);
     if (!data.userImage[0]) {
       setEmptyFileErr(true);
     }
+    createUser(data.email, data.password)
+      .then((user) => {
+        console.log(user);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
     // router.state = "/home";
     // router.push("/");
   };

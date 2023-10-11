@@ -7,8 +7,6 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 const Banner = () => {
-  console.log(process.env.FIREBASE_APIKEY);
-
   return (
     <div>
       <Swiper

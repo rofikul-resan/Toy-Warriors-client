@@ -11,10 +11,15 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import PrivetSellerNavLink from "./PrivetSellerNavLink";
+import { useSelector } from "react-redux";
+import { AuthContext } from "@/firebase/FirebaseProvider";
+import UserInfo from "./UserInfo";
 
 const NavigationBar = () => {
+  const user = useSelector((state) => state.User);
+  console.log(user);
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navLink = (
@@ -58,36 +63,46 @@ const NavigationBar = () => {
 
         <NavbarContent className="hidden sm:flex gap-4" justify="center">
           {navLink}
-          <PrivetSellerNavLink />
+          {user && <PrivetSellerNavLink />}
         </NavbarContent>
-        <NavbarContent justify="end">
-          {pathname === "/auth/login" ? (
-            <NavbarItem className="">
-              <Button
-                as={Link}
-                color="success"
-                href="/auth/sing-up"
-                variant="flat"
-              >
-                Sign Up
-              </Button>
-            </NavbarItem>
-          ) : (
-            <NavbarItem className="">
-              <Button
-                as={Link}
-                color="primary"
-                variant="flat"
-                href="/auth/login"
-              >
-                Login
-              </Button>
-            </NavbarItem>
-          )}
-        </NavbarContent>
+        {user ? (
+          <NavbarContent justify="end">
+            <UserInfo
+              name={user?.displayName}
+              email={user?.email}
+              image={user?.photoURL}
+            />
+          </NavbarContent>
+        ) : (
+          <NavbarContent justify="end">
+            {pathname === "/auth/login" ? (
+              <NavbarItem className="">
+                <Button
+                  as={Link}
+                  color="success"
+                  href="/auth/sing-up"
+                  variant="flat"
+                >
+                  Sign Up
+                </Button>
+              </NavbarItem>
+            ) : (
+              <NavbarItem className="">
+                <Button
+                  as={Link}
+                  color="primary"
+                  variant="flat"
+                  href="/auth/login"
+                >
+                  Login
+                </Button>
+              </NavbarItem>
+            )}
+          </NavbarContent>
+        )}
         <NavbarMenu>
           {navLink}
-          <PrivetSellerNavLink />
+          {user && <PrivetSellerNavLink />}
         </NavbarMenu>
       </Navbar>
     </div>

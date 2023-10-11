@@ -8,8 +8,11 @@ import {
   AiOutlineEyeInvisible,
   AiOutlineLogin,
 } from "react-icons/ai";
+import { useSelector } from "react-redux";
 
 const Login = () => {
+  const user = useSelector((state) => state.user);
+  console.log(user);
   const [isVisible, setIsVisible] = useState(false);
 
   const toggleVisibility = () => setIsVisible(!isVisible);

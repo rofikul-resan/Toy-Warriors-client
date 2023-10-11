@@ -1,8 +1,7 @@
 "use client";
-import React from "react";
 import { InfinitySpin } from "react-loader-spinner";
 
-const Loading = () => {
+const Loading = (props) => {
   return (
     <div className="flex justify-center items-center h-screen w-screen">
       <div>

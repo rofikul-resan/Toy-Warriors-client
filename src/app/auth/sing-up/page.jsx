@@ -1,12 +1,11 @@
 "use client";
 import { AuthContext } from "@/firebase/FirebaseProvider";
-import useAuth from "@/hook/useAuth";
 import { Button, Input } from "@nextui-org/react";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useContext, useState } from "react";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import {
   AiOutlineEye,
   AiOutlineEyeInvisible,

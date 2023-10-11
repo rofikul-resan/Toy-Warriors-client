@@ -10,6 +10,9 @@ const PrivetSellerNavLink = () => {
       <NavbarItem isActive={pathname.includes("/my-toy")}>
         <Link href="/my-toy">My Toy</Link>
       </NavbarItem>
+      <NavbarItem isActive={pathname.includes("/add-toy")}>
+        <Link href="/add-toy">Add Toy</Link>
+      </NavbarItem>
     </>
   );
 };

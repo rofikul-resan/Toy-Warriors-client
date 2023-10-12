@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
+  signInWithEmailAndPassword,
   signOut,
   updateProfile,
 } from "firebase/auth";
@@ -18,7 +19,7 @@ const FirebaseProvider = ({ children }) => {
   const auth = getAuth(firebaseApp);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState({});
+  const [userLoading, setUserLoading] = useState(false);
 
   // sing in
   const createUser = (email, password, name, image) => {
@@ -33,17 +34,21 @@ const FirebaseProvider = ({ children }) => {
     });
   };
 
+  //log in
+  const logIn = (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password);
+  };
+
   //log out
   const logOutUser = () => {
     return signOut(auth);
   };
 
   useEffect(() => {
-    setLoading(true);
     const updateUser = onAuthStateChanged(auth, (user) => {
       if (user) {
         setLoading(false);
-        setUser(user);
+        setUserLoading(false);
         dispatch(
           addUser({
             name: user.displayName,
@@ -62,6 +67,7 @@ const FirebaseProvider = ({ children }) => {
           });
       } else {
         setLoading(false);
+        setUserLoading(false);
         dispatch(removeUser());
         localStorage.removeItem("token");
       }
@@ -70,7 +76,14 @@ const FirebaseProvider = ({ children }) => {
   }, [dispatch, auth]);
 
   //auth value for full app
-  const authValue = { createUser, updateUserInfo, user, loading, logOutUser };
+  const authValue = {
+    createUser,
+    updateUserInfo,
+    loading,
+    logOutUser,
+    userLoading,
+    logIn,
+  };
   return (
     <AuthContext.Provider value={authValue}>{children}</AuthContext.Provider>
   );

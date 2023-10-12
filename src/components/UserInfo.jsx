@@ -22,7 +22,6 @@ const UserInfo = ({ name, image, email }) => {
         <DropdownTrigger>
           <Avatar
             isBordered
-            as="button"
             className="transition-transform"
             color="secondary"
             name={name}

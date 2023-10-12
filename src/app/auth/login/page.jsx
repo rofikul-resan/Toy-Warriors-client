@@ -1,24 +1,36 @@
 "use client";
+import { AuthContext } from "@/firebase/FirebaseProvider";
 import { Button, Input } from "@nextui-org/react";
 import Link from "next/link";
-import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   AiOutlineEye,
   AiOutlineEyeInvisible,
   AiOutlineLogin,
 } from "react-icons/ai";
-import { useSelector } from "react-redux";
 
 const Login = () => {
-  const user = useSelector((state) => state.user);
-  console.log(user);
+  const { logIn } = useContext(AuthContext);
   const [isVisible, setIsVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const toggleVisibility = () => setIsVisible(!isVisible);
   const { handleSubmit, register } = useForm();
 
   const handleLogin = (data) => {
+    setLoading(true);
+    logIn(data.email, data.password)
+      .then(() => {
+        setLoading(false);
+        router.push(router.state || "/");
+        router.state = null;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     console.log(data);
   };
   return (
@@ -71,6 +83,7 @@ const Login = () => {
             className="px-10 w-full"
             radius="sm"
             variant="shadow"
+            isLoading={loading}
             endContent={<AiOutlineLogin className="text-xl" />}
           >
             Login

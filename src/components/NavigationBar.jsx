@@ -68,7 +68,7 @@ const NavigationBar = () => {
         {user ? (
           <NavbarContent justify="end">
             <UserInfo
-              name={user?.displayName}
+              name={user?.name}
               email={user?.email}
               image={user?.photoURL}
             />

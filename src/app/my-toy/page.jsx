@@ -13,9 +13,11 @@ import { AiOutlineDelete, AiOutlineEdit, AiOutlineEye } from "react-icons/ai";
 
 import React from "react";
 import Link from "next/link";
-import { handleDeleteToy } from "./myToyWarkerUtlis";
 
 const MyToyPage = () => {
+  const handleDeleteToy = () => {
+    console.log("click");
+  };
   return (
     <div>
       <div className="w-10/12 mx-auto my-8">

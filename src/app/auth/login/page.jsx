@@ -1,6 +1,7 @@
 "use client";
 import { AuthContext } from "@/firebase/FirebaseProvider";
 import { Button, Input } from "@nextui-org/react";
+import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useContext, useState } from "react";
@@ -10,6 +11,7 @@ import {
   AiOutlineEyeInvisible,
   AiOutlineLogin,
 } from "react-icons/ai";
+import { serverUrl } from "../../../../utils/utils";
 
 const Login = () => {
   const { logIn } = useContext(AuthContext);
@@ -23,10 +25,21 @@ const Login = () => {
   const handleLogin = (data) => {
     setLoading(true);
     logIn(data.email, data.password)
-      .then(() => {
-        setLoading(false);
-        router.push(router.state || "/");
-        router.state = null;
+      .then((userData) => {
+        const user = userData.user;
+        console.log(user);
+        axios
+          .post(`${serverUrl}/jwt`, {
+            name: user.displayName,
+            email: user.email,
+          })
+          .then((res) => {
+            const token = res.data.token;
+            localStorage.setItem("token", token);
+            setLoading(false);
+            router.push(router.state || "/");
+            router.state = null;
+          });
       })
       .catch((err) => {
         console.log(err);

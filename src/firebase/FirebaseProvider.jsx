@@ -56,15 +56,6 @@ const FirebaseProvider = ({ children }) => {
             photoURL: user.photoURL,
           })
         );
-        axios
-          .post(`${serverUrl}/jwt`, {
-            name: user.displayName,
-            email: user.email,
-          })
-          .then((res) => {
-            const token = res.data.token;
-            localStorage.setItem("token", token);
-          });
       } else {
         setLoading(false);
         setUserLoading(false);

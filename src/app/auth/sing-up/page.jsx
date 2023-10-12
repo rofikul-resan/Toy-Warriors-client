@@ -78,6 +78,15 @@ const SingUp = () => {
       if (userInfo.user) {
         await updateUserInfo(data.fullName, imgUrl);
         const user = userInfo.user;
+        axios
+          .post(`${serverUrl}/jwt`, {
+            name: user.displayName,
+            email: user.email,
+          })
+          .then((res) => {
+            const token = res.data.token;
+            localStorage.setItem("token", token);
+          });
 
         const res = await axios.post(`${serverUrl}/user`, {
           name: data.fullName.trim(),

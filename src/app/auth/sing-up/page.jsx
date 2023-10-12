@@ -11,6 +11,7 @@ import {
   AiOutlineEyeInvisible,
   AiOutlineLogin,
 } from "react-icons/ai";
+import { serverUrl } from "../../../../utils/utils";
 
 const SingUp = () => {
   // firebase function
@@ -75,19 +76,23 @@ const SingUp = () => {
       const imgUrl = res.data.data.display_url;
       const userInfo = await createUser(data.email, data.password);
       if (userInfo.user) {
-        const user = await updateUserInfo(data.fullName, imgUrl);
-        console.log("user", user);
-        if (user) {
-          setLoading(false);
-          reset();
-        }
+        await updateUserInfo(data.fullName, imgUrl);
+        const user = userInfo.user;
+
+        const res = await axios.post(`${serverUrl}/user`, {
+          name: data.fullName.trim(),
+          email: data.email,
+          photoURL: imgUrl,
+        });
+        console.log("user res", res.data);
+        setLoading(false);
+        reset();
+        router.push("/");
       }
     } catch (err) {
       setLoading(false);
       console.log(err);
     }
-
-    // router.push("/");
   };
   return (
     <div className="bg-violet-600/10 w-10/12 rounded-lg  px-12 py-8 space-y-6 shadow-lg shadow-gray-400">
@@ -161,7 +166,7 @@ const SingUp = () => {
             </svg>
             <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
               <span className="font-semibold">
-                {imageFile ? imageFile[0].name : "Click to upload"}
+                {imageFile ? imageFile[0]?.name : "Click to upload"}
               </span>{" "}
               User Image
             </p>
@@ -188,7 +193,7 @@ const SingUp = () => {
             variant="shadow"
             endContent={<AiOutlineLogin className="text-xl" />}
           >
-            Login
+            Sing Up
           </Button>
         </div>
       </form>

@@ -1,3 +1,4 @@
+import { AuthContext } from "@/firebase/FirebaseProvider";
 import {
   Avatar,
   Button,
@@ -6,9 +7,15 @@ import {
   DropdownMenu,
   DropdownTrigger,
 } from "@nextui-org/react";
+import { useContext } from "react";
 import { BiLogOutCircle } from "react-icons/bi";
 
 const UserInfo = ({ name, image, email }) => {
+  const { logOutUser } = useContext(AuthContext);
+
+  const handleLogOut = () => {
+    logOutUser().then();
+  };
   return (
     <div>
       <Dropdown placement="bottom-end">
@@ -37,6 +44,7 @@ const UserInfo = ({ name, image, email }) => {
           <DropdownItem
             key="logout"
             color="primary"
+            onClick={handleLogOut}
             as={Button}
             variant="shadow"
             startContent={<BiLogOutCircle />}

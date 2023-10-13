@@ -8,15 +8,49 @@ import {
   Input,
   Textarea,
 } from "@nextui-org/react";
+import axios from "axios";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { BsArrowRight } from "react-icons/bs";
+import { serverUrl } from "../../../../../utils/utils";
+import { useSelector } from "react-redux";
 
 const UpdateToyPage = ({ params: { id } }) => {
-  const { handleSubmit, register } = useForm();
+  const [toy, setToy] = useState({});
+  const [loading, setLoading] = useState(false);
+  const { handleSubmit, register, reset } = useForm();
+
+  useEffect(() => {
+    axios
+      .get(`${serverUrl}/toy/get-toy/${id}`)
+      .then((res) => {
+        setToy(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [id]);
+
   const handleUpdateToy = (data) => {
-    console.log(data);
+    setLoading(true);
+    const updateDoc = {
+      name: data.name,
+      price: +data.price,
+      quantity: +data.quantity,
+      details: data.details,
+    };
+    axios
+      .patch(`${serverUrl}/toy/${id}`, updateDoc)
+      .then((res) => {
+        setToy(res.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    console.log(updateDoc);
   };
   return (
     <div className="md:w-10/12 mx-auto my-16">
@@ -30,17 +64,19 @@ const UpdateToyPage = ({ params: { id } }) => {
           <CardHeader>
             <div className="flex justify-between items-center w-full px-3">
               <div>
-                <h1 className="text-xl font-semibold">Barbie doll</h1>
-                <p className="italic text-xs">#barbie-doll</p>
+                <h1 className="text-xl font-semibold">{toy?.name}</h1>
+                <p className="italic text-xs">#{toy?.category}</p>
               </div>
               <div>
                 <p className="text-xs">
                   <span className="font-semibold"> Price : $</span>
-                  <span className="italic text-gray-700 ">58</span>
+                  <span className="italic text-gray-700 ">{toy?.price}</span>
                 </p>
                 <p className="text-xs">
                   <span className="font-semibold"> Quantity : </span>
-                  <span className="italic text-gray-700 ">158 </span>
+                  <span className="italic text-gray-700 ">
+                    {toy?.quantity}{" "}
+                  </span>
                 </p>
               </div>
             </div>
@@ -68,6 +104,7 @@ const UpdateToyPage = ({ params: { id } }) => {
                   className="space-y-3"
                 >
                   <Input
+                    {...register("name")}
                     type="text"
                     label=" Product Name"
                     placeholder="New Product name"
@@ -76,6 +113,7 @@ const UpdateToyPage = ({ params: { id } }) => {
                   />
                   <div className="grid grid-cols-2 gap-3">
                     <Input
+                      {...register("price")}
                       type="number"
                       label="Price"
                       placeholder=" New Price"
@@ -84,6 +122,7 @@ const UpdateToyPage = ({ params: { id } }) => {
                       startContent={<span>$</span>}
                     />
                     <Input
+                      {...register("quantity")}
                       type="number"
                       label="Quantity"
                       placeholder=" Available  Quantity"
@@ -92,16 +131,18 @@ const UpdateToyPage = ({ params: { id } }) => {
                     />
                   </div>
                   <Textarea
+                    {...register("details")}
                     placeholder="Update Details"
                     variant="bordered"
                     label="Details"
                   ></Textarea>
                   <Button
-                    isLoading={false}
+                    isLoading={loading}
                     endContent={<BsArrowRight />}
                     className="w-full"
                     color="success"
                     variant="shadow"
+                    type="submit"
                   >
                     Update Now
                   </Button>

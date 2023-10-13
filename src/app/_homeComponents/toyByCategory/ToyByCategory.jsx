@@ -32,7 +32,7 @@ const ToyByCategory = () => {
         <Tab key="car" title="Car">
           <ToysContener selectTab={selectedTab} />
         </Tab>
-        <Tab key="barbie-Boll" title="Barbie Boll">
+        <Tab key="barbie-doll" title="Barbie Boll">
           <ToysContener selectTab={selectedTab} />
         </Tab>
         <Tab key="educational" title="Educational">

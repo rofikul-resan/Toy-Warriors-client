@@ -27,7 +27,6 @@ const Login = () => {
     logIn(data.email, data.password)
       .then((userData) => {
         const user = userData.user;
-        console.log(user);
         axios
           .post(`${serverUrl}/jwt`, {
             name: user.displayName,

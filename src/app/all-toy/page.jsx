@@ -1,10 +1,23 @@
 "use client";
 import ToyCard from "@/components/ToyCard";
 import { Button, Input, Select, SelectItem } from "@nextui-org/react";
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
+import { serverUrl } from "../../../utils/utils";
 
 const AllToyPage = () => {
+  const [toys, setToys] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`${serverUrl}/toy`)
+      .then((res) => {
+        setToys(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   return (
     <div>
       <div className="space-y-3 my-4 ">
@@ -58,24 +71,9 @@ const AllToyPage = () => {
         </div>
       </div>
       <div className="w-10/12 mx-auto grid grid-cols-3 gap-6 my-6">
-        <ToyCard />
-        <ToyCard />
-        <ToyCard />
-        <ToyCard />
-        <ToyCard />
-        <ToyCard />
-        <ToyCard />
-        <ToyCard />
-        <ToyCard />
-        <ToyCard />
-        <ToyCard />
-        <ToyCard />
-        <ToyCard />
-        <ToyCard />
-        <ToyCard />
-        <ToyCard />
-        <ToyCard />
-        <ToyCard />
+        {toys.map((toy) => (
+          <ToyCard key={toy._id} toy={toy} />
+        ))}
       </div>
     </div>
   );

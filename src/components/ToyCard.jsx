@@ -1,5 +1,6 @@
 "use client";
 import {
+  Avatar,
   Button,
   Card,
   CardBody,
@@ -15,24 +16,28 @@ import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { BsArrowRight } from "react-icons/bs";
 import Rating from "react-rating";
 
-const ToyCard = () => {
+const ToyCard = ({ toy }) => {
+  const { price, rating, category, photo, name, seller } = toy;
+  console.log(toy);
   return (
     <div>
       <Card isFooterBlurred radius="lg">
         <CardHeader className="flex gap-3 shadow-md">
-          <Image
-            alt="nextui logo"
-            height={40}
+          <Avatar
+            src={seller?.photoURL}
+            alt={seller?.name}
+            size="sm"
+            name={seller?.name}
+            isBordered
+            className="transition-transform "
+            color="primary"
             radius="sm"
-            src="/logo-ToyWarriors.png"
-            width={40}
-            priority
           />
           <div className="flex justify-between w-full items-center">
             <div className="flex flex-col">
-              <p className="text-md capitalize">Rofikul Islam</p>
+              <p className="text-md capitalize">{seller?.name}</p>
               <p className="text-small  text-violet-600 italic">
-                resan@nextui.org
+                {seller?.email}
               </p>
             </div>
             <div className=" mr-5">
@@ -45,15 +50,15 @@ const ToyCard = () => {
           </div>
         </CardHeader>
         <CardBody>
-          <h1 className="text-2xl font-semibold">Barbie Boll </h1>
+          <h1 className="text-2xl font-semibold">{name}</h1>
           <p className="text-xs">
             <span className="font-semibold"> Category : #</span>
-            <span className="italic text-gray-700 ">Barbie Boll</span>
+            <span className="italic text-gray-700 ">{category}</span>
           </p>
           <p className="text-xs flex items-center">
             <span className="font-semibold"> Ratting :</span>
             <Rating
-              initialRating={4.5}
+              initialRating={rating}
               emptySymbol={
                 <AiOutlineStar className="text-orange-600 ml-1 text-medium" />
               }
@@ -61,23 +66,25 @@ const ToyCard = () => {
                 <AiFillStar className="text-orange-600 ml-1 text-medium" />
               }
             />{" "}
-            <span className="font-semibold">4.5</span>
+            <span className="font-semibold">{rating}</span>
           </p>
         </CardBody>
-        <Image
-          alt="Woman listing to music"
-          className="object-cover mx-auto h-48"
-          height={200}
-          src="/barbie-Doll.webp"
-          width={200}
-          loading="lazy"
-        />
+        <div className="h-56 overflow-hidden">
+          <Image
+            alt={name}
+            className="object-cover w-full"
+            height={200}
+            src={photo}
+            width={200}
+            loading="lazy"
+          />
+        </div>
         <Divider />
 
         <CardFooter className="justify-between bg-black/30 before:bg-white/10 border-white/20 border-1 overflow-hidden py-2 mb-2 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_15px)] shadow-small mx-2 z-10">
           <p className="text-tiny text-white ">
             Available on Only :{" "}
-            <span className="font-semibold italic">$ 10</span>
+            <span className="font-semibold italic">$ {price}</span>
           </p>
           <Button
             className="text-tiny text-white bg-black/20 gap-2"
@@ -87,7 +94,7 @@ const ToyCard = () => {
             size="sm"
             endContent={<BsArrowRight />}
             as={Link}
-            href="/toy/main"
+            href={`/toy/${toy?._id}`}
           >
             More Details
           </Button>

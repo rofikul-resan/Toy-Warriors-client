@@ -61,6 +61,7 @@ const AddToyPage = () => {
       rating: +data.rating,
       category: data.category,
       seller: user,
+      details: data.details,
     };
     setLoading(true);
     try {
@@ -75,7 +76,7 @@ const AddToyPage = () => {
       productData.photo = res.data.data.display_url;
       console.log(productData, res.data.data.display_url);
       const toyRes = await axios.post(`${serverUrl}/toy`, productData);
-      console.log("toy", res.data.success);
+      console.log("toy", toyRes.data);
       reset();
     } catch (err) {
       setLoading(false);
@@ -205,6 +206,7 @@ const AddToyPage = () => {
                     </p>
                   )}
                   <Textarea
+                    {...register("details", { required: true })}
                     placeholder="Update Details"
                     variant="bordered"
                     label="Details"

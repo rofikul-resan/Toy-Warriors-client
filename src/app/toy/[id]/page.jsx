@@ -41,7 +41,7 @@ const ToyIdPage = ({ params }) => {
             <h2 className="text-sm title-font text-gray-500 tracking-widest">
               Product Name
             </h2>
-            <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">
+            <h1 className="text-gray-900 text-3xl title-font font-medium mb-1 capitalize">
               {toy?.name}
             </h1>
             <div className="flex mb-4 items-center">

@@ -12,6 +12,7 @@ import {
   AiOutlineLogin,
 } from "react-icons/ai";
 import { serverUrl } from "../../../../utils/utils";
+import Swal from "sweetalert2";
 
 const SingUp = () => {
   // firebase function
@@ -86,6 +87,11 @@ const SingUp = () => {
           .then((res) => {
             const token = res.data.token;
             localStorage.setItem("token", token);
+            Swal.fire({
+              icon: "success",
+              title: "User Sing Up Sussusfull",
+              text: "Something went wrong!",
+            });
           });
 
         const res = await axios.post(`${serverUrl}/user`, {
@@ -217,7 +223,7 @@ const SingUp = () => {
           </Link>{" "}
         </p>
       </div>
-      <div>
+      <div className="hidden">
         <div>
           <p className="text-center border-b border-black"></p>
           <h1 className="text-center my-5 font-semibold "> Login With </h1>

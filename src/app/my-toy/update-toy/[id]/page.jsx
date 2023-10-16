@@ -15,6 +15,7 @@ import { useForm } from "react-hook-form";
 import { BsArrowRight } from "react-icons/bs";
 import { serverUrl } from "../../../../../utils/utils";
 import { useSelector } from "react-redux";
+import Swal from "sweetalert2";
 
 const UpdateToyPage = ({ params: { id } }) => {
   const [toy, setToy] = useState({});
@@ -46,6 +47,11 @@ const UpdateToyPage = ({ params: { id } }) => {
       .then((res) => {
         setToy(res.data);
         setLoading(false);
+        Swal.fire({
+          icon: "success",
+          title: "Toy Update Sussusfull",
+          text: "Something went wrong!",
+        });
       })
       .catch((err) => {
         console.log(err);

@@ -17,6 +17,7 @@ import { AiOutlineStar } from "react-icons/ai";
 import { BsArrowRight } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { serverUrl } from "../../../utils/utils";
+import Swal from "sweetalert2";
 
 const AddToyPage = () => {
   const user = useSelector((state) => state.User);
@@ -78,6 +79,11 @@ const AddToyPage = () => {
       const toyRes = await axios.post(`${serverUrl}/toy`, productData);
       console.log("toy", toyRes.data);
       reset();
+      Swal.fire({
+        icon: "success",
+        title: "Toy Add Sussusfull",
+        text: "Something went wrong!",
+      });
     } catch (err) {
       setLoading(false);
       console.log(err);

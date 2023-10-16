@@ -17,6 +17,7 @@ import { useSelector } from "react-redux";
 import { serverUrl } from "../../../utils/utils";
 import axios from "axios";
 import { Bars } from "react-loader-spinner";
+import { toast } from "react-toastify";
 
 const MyToyPage = () => {
   const [toys, setToys] = useState([]);
@@ -37,6 +38,7 @@ const MyToyPage = () => {
       });
   }, [user]);
   const handleDeleteToy = () => {
+    toast("Delete toy");
     console.log("click");
   };
   return (

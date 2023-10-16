@@ -8,6 +8,8 @@ import { serverUrl } from "../../../utils/utils";
 
 const AllToyPage = () => {
   const [toys, setToys] = useState([]);
+  const [textSearch, setTextSearch] = useState("");
+  const [sortKey, setSortKey] = useState("");
   useEffect(() => {
     axios
       .get(`${serverUrl}/toy`)
@@ -18,54 +20,67 @@ const AllToyPage = () => {
         console.log(err);
       });
   }, []);
+
+  //Search implement
+  useEffect(() => {
+    console.log(sortKey);
+    let url;
+    if (textSearch) {
+      url = `${serverUrl}/toy/search?key=${textSearch}`;
+    } else {
+      url = `${serverUrl}/toy`;
+    }
+    console.log(url);
+    // axios
+    //   .get(url)
+    //   .then((res) => setToys(res.data))
+    //   .catch((err) => console.log(err));
+  }, [textSearch, sortKey]);
+
+  const searchToy = () => {};
   return (
     <div>
       <div className="space-y-3 my-4 ">
         <h1 className="text-center text-3xl font-bold capitalize">
           See our all toy
         </h1>
-        <p className="w-8/12 text-center mx-auto">
-          Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical
-          gentrify, subway tile poke farm-to-table. Franzen you probably havent
-          heard of them
-        </p>
       </div>
       <div className="flex justify-between md:w-[1235px] mx-auto">
         <div></div>
         <div className="w-fit mx-auto h-fit flex gap-6 items-center">
-          <div className="w-64">
+          <div className="w-64 ml-[8.5rem]">
             <Input
+              onChange={(e) => {
+                setTextSearch(e.target.value);
+                searchToy();
+              }}
               label="Search"
               isClearable
               radius="lg"
               variant="bordered"
               color="primary"
-              placeholder="Type to search..."
+              value={textSearch}
+              placeholder="Type name to search..."
               startContent={
                 <AiOutlineSearch className="text-black/50 dark:text-white/90 text-slate-400 pointer-events-none flex-shrink-0" />
               }
             />
           </div>
-          <Button
-            color="primary"
-            variant="shadow"
-            className="px-6"
-            endContent={<AiOutlineSearch />}
-          >
-            Search
-          </Button>
         </div>
         <div>
           <Select
-            label="Sort By Pricing "
-            placeholder="Select an animal"
-            className="max-w-xs"
+            label="Sort by Price"
+            variant="bordered"
+            placeholder="Select an option"
+            selectedKeys={sortKey}
+            onSelectionChange={setSortKey}
+            className="w-36"
           >
-            <SelectItem key="ascending" value="ascending">
-              Ascending
+            <SelectItem key="ascending" value="1">
+              High to Low
             </SelectItem>
-            <SelectItem key="descending" value="descending">
-              Descending
+            <SelectItem key="descending" value="-1">
+              Low to Heigh
             </SelectItem>
           </Select>
         </div>

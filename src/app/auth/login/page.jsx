@@ -12,6 +12,7 @@ import {
   AiOutlineLogin,
 } from "react-icons/ai";
 import { serverUrl } from "../../../../utils/utils";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const { logIn } = useContext(AuthContext);
@@ -36,6 +37,7 @@ const Login = () => {
             const token = res.data.token;
             localStorage.setItem("token", token);
             setLoading(false);
+            toast("Login Successful");
             router.push(router.state || "/");
             router.state = null;
           });
@@ -113,7 +115,7 @@ const Login = () => {
           </Link>{" "}
         </p>
       </div>
-      <div>
+      <div className="hidden">
         <div>
           <p className="text-center border-b border-black"></p>
           <h1 className="text-center my-5 font-semibold "> Login With </h1>

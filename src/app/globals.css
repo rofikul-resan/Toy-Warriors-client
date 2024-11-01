@@ -2,10 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-    scroll-behavior: smooth;
 
-}
 
 h1,
 h2,
@@ -17,7 +14,7 @@ h4 {
 
 
 .data-\[active\=true\]\:font-semibold[data-active=true] {
-    @apply border-b border-orange-500
+    @apply border-b border-accent
 }
 
 .category-card:hover .title-category {

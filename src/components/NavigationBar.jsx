@@ -11,43 +11,30 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { useContext, useState } from "react";
-import PrivetSellerNavLink from "./PrivetSellerNavLink";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import UserInfo from "./UserInfo";
+import PrivetSellerNavLink from "./navlink/PrivetSellerNavLink";
+import NavLinkInit from "./navlink/NavlinkInit";
 
 const NavigationBar = () => {
   const user = useSelector((state) => state.User);
   console.log(user);
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const navLink = (
-    <>
-      <NavbarItem isActive={pathname === "/"}>
-        <Link href="/">Home</Link>
-      </NavbarItem>
-      <NavbarItem isActive={pathname.includes("/all-toy")}>
-        <Link href="/all-toy">All Toy</Link>
-      </NavbarItem>
-      <NavbarItem isActive={pathname.includes("/blogs")}>
-        <Link href="/blogs">Blogs</Link>
-      </NavbarItem>
-    </>
-  );
+
   return (
-    <div>
-      <Navbar
-        position="sticky"
-        maxWidth="xl"
-        isBordered
-        className="shadow-sm sticky top-0 bg-primary-light"
-      >
-        <NavbarContent>
-          <NavbarMenuToggle
-            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-            className="sm:hidden"
-          />
-          <NavbarBrand>
+    <Navbar
+      onMenuOpenChange={setIsMenuOpen}
+      className="shadow-sm  bg-primary-light"
+    >
+      <NavbarContent>
+        <NavbarMenuToggle
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          className="sm:hidden"
+        />
+        <NavbarBrand>
+          <Link href={"/"} className="flex items-center">
             <Image
               src={"/logo-ToyWarriors.png"}
               alt="logo"
@@ -59,49 +46,49 @@ const NavigationBar = () => {
             <p className="font-bold text-inherit text-primary-dark">
               ToyWarrior
             </p>
-          </NavbarBrand>
-        </NavbarContent>
+          </Link>
+        </NavbarBrand>
+      </NavbarContent>
 
-        <NavbarContent className="hidden sm:flex gap-4" justify="center">
-          {navLink}
-          {user && <PrivetSellerNavLink />}
+      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+        <NavLinkInit />
+        {user && <PrivetSellerNavLink />}
+      </NavbarContent>
+      {user ? (
+        <NavbarContent justify="end">
+          <UserInfo
+            name={user?.name}
+            email={user?.email}
+            image={user?.photoURL}
+          />
         </NavbarContent>
-        {user ? (
-          <NavbarContent justify="end">
-            <UserInfo
-              name={user?.name}
-              email={user?.email}
-              image={user?.photoURL}
-            />
-          </NavbarContent>
-        ) : (
-          <NavbarContent justify="end">
-            {pathname === "/auth/login" ? (
-              <NavbarItem className="">
-                <Button
-                  as={Link}
-                  color="success"
-                  href="/auth/sing-up"
-                  variant="flat"
-                >
-                  Sign Up
-                </Button>
-              </NavbarItem>
-            ) : (
-              <NavbarItem className="">
-                <Button as={Link} color="primary" href="/auth/login">
-                  Login
-                </Button>
-              </NavbarItem>
-            )}
-          </NavbarContent>
-        )}
-        <NavbarMenu>
-          {navLink}
-          {user && <PrivetSellerNavLink />}
-        </NavbarMenu>
-      </Navbar>
-    </div>
+      ) : (
+        <NavbarContent justify="end">
+          {pathname === "/auth/login" ? (
+            <NavbarItem className="">
+              <Button
+                as={Link}
+                color="success"
+                href="/auth/sing-up"
+                variant="flat"
+              >
+                Sign Up
+              </Button>
+            </NavbarItem>
+          ) : (
+            <NavbarItem className="">
+              <Button as={Link} color="primary" href="/auth/login">
+                Login
+              </Button>
+            </NavbarItem>
+          )}
+        </NavbarContent>
+      )}
+      <NavbarMenu>
+        <NavLinkInit />
+        {user && <PrivetSellerNavLink />}
+      </NavbarMenu>
+    </Navbar>
   );
 };
 

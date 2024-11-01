@@ -1,0 +1,25 @@
+{
+    "category": "action",
+    "details": "Iron Spider toy featuring intricate details, high durability, and vibrant colors. This collectible action figure is inspired by the iconic suit from the superhero universe, with posable limbs and finely crafted accessories. Perfect for fans, collectors, and kids, it stands out as both a display piece and a play companion. Suitable for ages 6 and up.",
+    "name": "Iron Spider toy",
+    "photo": {
+        "primary": "https://i.ibb.co/Lzqqwrg/1643639144-spiderman-1643639136.jpg",
+        "moreImage": [
+            "https://i.ibb.co/Lzqqwrg/1643639144-spiderman-1643639136.jpg",
+            "https://i.ibb.co/Lzqqwrg/1643639144-spiderman-1643639136.jpg",
+            "https://i.ibb.co/Lzqqwrg/1643639144-spiderman-1643639136.jpg",
+            "https://i.ibb.co/Lzqqwrg/1643639144-spiderman-1643639136.jpg",
+            "https://i.ibb.co/Lzqqwrg/1643639144-spiderman-1643639136.jpg"
+        ]
+    },
+    "price": 100,
+    "quantity": 522,
+    "rating": 5,
+    "seller": {
+        "name": "resan",
+        "email": "bs@0.com",
+        "photoURL": "https://i.ibb.co/p4Y4Hzp/image-downloader-1678123215346.png"
+    },
+    "__v": 0,
+    "_id": "6527fd2f6e445ae4622675b3"
+}

@@ -18,6 +18,8 @@ import Rating from "react-rating";
 
 const ToyCard = ({ toy }) => {
   const { price, rating, category, photo, name, seller } = toy;
+  console.log(toy);
+
   return (
     <div>
       <Card isFooterBlurred radius="lg">

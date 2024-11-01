@@ -14,7 +14,6 @@ import { usePathname } from "next/navigation";
 import React, { useContext, useState } from "react";
 import PrivetSellerNavLink from "./PrivetSellerNavLink";
 import { useSelector } from "react-redux";
-import { AuthContext } from "@/firebase/FirebaseProvider";
 import UserInfo from "./UserInfo";
 
 const NavigationBar = () => {
@@ -41,7 +40,7 @@ const NavigationBar = () => {
         position="sticky"
         maxWidth="xl"
         isBordered
-        className="shadow-sm sticky top-0"
+        className="shadow-sm sticky top-0 bg-primary-light"
       >
         <NavbarContent>
           <NavbarMenuToggle
@@ -57,7 +56,9 @@ const NavigationBar = () => {
               className="h-10 w-auto"
               priority
             />
-            <p className="font-bold text-inherit">ToyWarrior</p>
+            <p className="font-bold text-inherit text-primary-dark">
+              ToyWarrior
+            </p>
           </NavbarBrand>
         </NavbarContent>
 
@@ -88,12 +89,7 @@ const NavigationBar = () => {
               </NavbarItem>
             ) : (
               <NavbarItem className="">
-                <Button
-                  as={Link}
-                  color="primary"
-                  variant="flat"
-                  href="/auth/login"
-                >
+                <Button as={Link} color="primary" href="/auth/login">
                   Login
                 </Button>
               </NavbarItem>
